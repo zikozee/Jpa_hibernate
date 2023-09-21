@@ -9,35 +9,29 @@ import jakarta.persistence.Persistence;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
 
+        Map<String, String> props = new HashMap<>();
+        props.put("hibernate.show_sql", "true");
+        props.put("hibernate.hbm2ddl.auto", "update"); //create, update, validate, none
+
 //        EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit"); // for xml
         EntityManagerFactory emf = new HibernatePersistenceProvider()
-                .createContainerEntityManagerFactory(new CustomPersistenceUnitInfo2(), new HashMap<>());
+                .createContainerEntityManagerFactory(new CustomPersistenceUnitInfo2(), props);
         EntityManager em = emf.createEntityManager(); // represents the context
 
        try{
            em.getTransaction().begin();
 
-//           Product product = new Product();
-//           product.setId(3);
-//           product.setName("Books");
-//
-//           em.persist(product);  // add this to context  --> NOT AN INSERT QUERY
+           var e1 = em.getReference(Employee.class, 1);
+           System.out.println(e1);
 
-           //finding entity
-           Employee employee = em.find(Employee.class, 1); // if this already occur in the context, it doesn't pick from the database
-           System.out.println("employee: " +employee);
+           e1.setName("Gee");
 
-           // no change will occur since the below mirrors what is in the database already
-           Employee e2 = new Employee();
-           e2.setId(1);
-           e2.setName("Mary");
-           e2.setAddress("123 Bus st");
-
-           em.merge(e2);
+           em.refresh(e1); //uses what is in the database in place of the update issues by setting some data
 
            em.getTransaction().commit();
        }finally {

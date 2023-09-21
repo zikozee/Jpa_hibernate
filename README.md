@@ -51,6 +51,12 @@ on student delete, course should not be deleted
 hence cascade should not be delete
 
 
+# find vs reference
+- find issues a select
+- reference only gets a reference in a lazy way, then when used, it issued the reference
+
+# uses what is in the database in place of the update issued by setting some data
+
 
 
 
