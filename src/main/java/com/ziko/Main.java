@@ -18,7 +18,7 @@ public class Main {
 
         Map<String, String> props = new HashMap<>();
         props.put("hibernate.show_sql", "true");
-        props.put("hibernate.hbm2ddl.auto", "create"); //create, update, validate, none
+        props.put("hibernate.hbm2ddl.auto", "update"); //create, update, validate, none
 
 //        EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit"); // for xml
         EntityManagerFactory emf = new HibernatePersistenceProvider()
@@ -32,11 +32,14 @@ public class Main {
            id.setNumber(34L);
            id.setCode("Code1");
 
-           Student student = new Student();
-           student.setId(id);
-           student.setName("Bilbo Baggins");
+//           Student student = new Student();
+//           student.setId(id);
+//           student.setName("Bilbo Baggins");
+//
+//           em.persist(student);
 
-           em.persist(student);
+           Student s = em.find(Student.class, id);
+           System.out.println(s);
 
            em.getTransaction().commit();
        }finally {
