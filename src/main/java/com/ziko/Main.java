@@ -26,13 +26,12 @@ public class Main {
        try{
            em.getTransaction().begin();
 
+           Product product = new Product();
+           product.setCode("ABC");
+           product.setNumber(2L);
+           product.setColor("Blue");
 
-           // no change will occur since the below mirrors what is in the database already
-           Employee e1 = new Employee();
-           e1.setName("Ziko");
-           e1.setAddress("123 Bus st");
-
-           em.persist(e1);
+           em.persist(product);
 
            em.getTransaction().commit();
        }finally {

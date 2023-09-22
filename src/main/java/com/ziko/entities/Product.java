@@ -1,31 +1,46 @@
 package com.ziko.entities;
 
+import com.ziko.keys.ProductKey;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "product")
+@IdClass(value = ProductKey.class)
 public class Product {
 
     @Id
-    private Integer id;
+    private String code;
 
-    private String name;
+    @Id
+    private long number;
 
-    public Integer getId() {
-        return id;
+    private String color;
+
+
+    public String getCode() {
+        return code;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getName() {
-        return name;
+    public long getNumber() {
+        return number;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNumber(long number) {
+        this.number = number;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }
