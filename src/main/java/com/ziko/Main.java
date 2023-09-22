@@ -2,6 +2,8 @@ package com.ziko;
 
 import com.ziko.entities.Employee;
 import com.ziko.entities.Product;
+import com.ziko.entities.Student;
+import com.ziko.keys.StudentKey;
 import com.ziko.persistence.CustomPersistenceUnitInfo2;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -26,12 +28,15 @@ public class Main {
        try{
            em.getTransaction().begin();
 
-           Product product = new Product();
-           product.setCode("ABC");
-           product.setNumber(2L);
-           product.setColor("Blue");
+           StudentKey id = new StudentKey();
+           id.setNumber(34L);
+           id.setCode("Code1");
 
-           em.persist(product);
+           Student student = new Student();
+           student.setId(id);
+           student.setName("Bilbo Baggins");
+
+           em.persist(student);
 
            em.getTransaction().commit();
        }finally {
