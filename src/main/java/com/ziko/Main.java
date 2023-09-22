@@ -16,7 +16,7 @@ public class Main {
 
         Map<String, String> props = new HashMap<>();
         props.put("hibernate.show_sql", "true");
-        props.put("hibernate.hbm2ddl.auto", "update"); //create, update, validate, none
+        props.put("hibernate.hbm2ddl.auto", "create"); //create, update, validate, none
 
 //        EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit"); // for xml
         EntityManagerFactory emf = new HibernatePersistenceProvider()
@@ -26,12 +26,13 @@ public class Main {
        try{
            em.getTransaction().begin();
 
-           var e1 = em.getReference(Employee.class, 1);
-           System.out.println(e1);
 
-           e1.setName("Gee");
+           // no change will occur since the below mirrors what is in the database already
+           Employee e1 = new Employee();
+           e1.setName("Ziko");
+           e1.setAddress("123 Bus st");
 
-           em.refresh(e1); //uses what is in the database in place of the update issues by setting some data
+           em.persist(e1);
 
            em.getTransaction().commit();
        }finally {

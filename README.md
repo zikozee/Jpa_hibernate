@@ -58,6 +58,10 @@ hence cascade should not be delete
 # uses what is in the database in place of the update issued by setting some data
 
 
+# Composite primary keys
+- this is essential when an already existing database is now brought under hibernate management with no unique identifier
+
+
 
 
 

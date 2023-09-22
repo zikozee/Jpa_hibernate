@@ -1,25 +1,27 @@
 package com.ziko.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.ziko.generators.UUIDGenerator;
+import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity //name used here is the name used in the context
 @Table(name = "employee") // name used in the table
 public class Employee {
 
     @Id
-    private Integer id;
+    @GenericGenerator(name = "UUIDGenerator", type = UUIDGenerator.class)
+    @GeneratedValue(generator = "UUIDGenerator")
+    @Column(length = 500)
+    private String id;
     @Column(columnDefinition = "")
     private String name;
     private String address;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
