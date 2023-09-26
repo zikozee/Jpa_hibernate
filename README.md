@@ -99,4 +99,12 @@ hence cascade should not be delete
 # OrphanRemoval (OneToOne and OneToMany)
 - The orphanRemoval functionality is intended for entities that are privately "owned" by their parent entity
 
+# SecondaryTable
+- secondaryTable is not a Jpa relationship but it does exist when working with legacy application
+- where they already define two tables which are somewhat like 1 - 1 relationship
+- but was not created with JPA, this is not a relationship from jpa point of view but a relationship in the database
+- and we require some fields in the other table(s)
+
+- hence we only need define one Entity and use @SecondaryTable to map the other tables
+
 
