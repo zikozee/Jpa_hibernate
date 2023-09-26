@@ -64,15 +64,39 @@ hence cascade should not be delete
 
 # Relationships
 ## One to One
-  - cascade type should be ALL since _non-owning side belongs to the owning side alone_
   -  to change the column name for the reference key we use the joinColumn else it will use <entityName_id> of the non-owning side
+  - joinColumn is always on the owning side
+  - cascade type should be ALL since _non-owning side belongs to the owning side alone_
+  - when you cascade, only one persist is needed as it will trickle down to the related entities
+  - same with _**remove, refresh, merge, find, reference and detach**_
   - UniDirectional
     - only the owning side should know about the relationship
     - only the owning side has the @OnetoOne annotation
   - BiDirectional
+    - mappedBy = "<the variable name used in the owning side>"
+    - both side need to be linked to each other
+      - i.e
+        - person.setPassport(passport);
+        - passport.setPerson(person);
+    - you can now query from both side
 
 
+# FetchType
+- EAGER -> this issues a join to call the non-owning side recommended for OneToOne
+- LAZY ->  when dealing with collections is advisable to use Lazy
+  - as this would postpone the loading 
+    - it would only be called/ pulled when the collection or non-owning side is called or used at first
+    - i.e only the other fields of the entity(owning-side) would be called 
+      - then on the collections usage, the join (another query) is then issued
 
+    
+# Optional 
+- this is false by default for relationships
+- however, if you have a case where the owning side does not necessarily have a non-owning side then set to true
+  - e.g User -> Book class
+  - if some Users only have book relationship, then this is an ideal case to set to true
 
+# OrphanRemoval (OneToOne and OneToMany)
+- The orphanRemoval functionality is intended for entities that are privately "owned" by their parent entity
 
 

@@ -1,9 +1,6 @@
 package com.ziko.entities.onetoone;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Passport {
@@ -13,6 +10,10 @@ public class Passport {
     private Integer id;
 
     private String number;
+
+
+    @OneToOne(mappedBy = "passport")
+    private Person person;
 
     public Integer getId() {
         return id;
@@ -28,6 +29,14 @@ public class Passport {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     @Override

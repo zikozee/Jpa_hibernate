@@ -34,6 +34,7 @@ public class RelationshipsMain {
            person.setName("John");
 
            person.setPassport(passport);
+           passport.setPerson(person);
 
            // no specific other since its just loading to context and not saving to database
            em.persist(person);
