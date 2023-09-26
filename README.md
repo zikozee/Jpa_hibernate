@@ -62,6 +62,16 @@ hence cascade should not be delete
 - this is essential when an already existing database is now brought under hibernate management with no unique identifier
 
 
+# Relationships
+## One to One
+  - cascade type should be ALL since _non-owning side belongs to the owning side alone_
+  -  to change the column name for the reference key we use the joinColumn else it will use <entityName_id> of the non-owning side
+  - UniDirectional
+    - only the owning side should know about the relationship
+    - only the owning side has the @OnetoOne annotation
+  - BiDirectional
+
+
 
 
 
