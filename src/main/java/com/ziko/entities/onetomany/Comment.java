@@ -14,9 +14,8 @@ public class Comment {
     private String content;
 
     /*scenario 1*/
-//    @ManyToOne
-//    @JoinColumn(name = "post")
-//    private Post post;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Post post;
 
 
     public int getId() {
@@ -36,11 +35,11 @@ public class Comment {
     }
 
 
-//    public Post getPost() {
-//        return post;
-//    }
-//
-//    public void setPost(Post post) {
-//        this.post = post;
-//    }
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
 }

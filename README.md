@@ -1,4 +1,8 @@
 # JPA_HIBERNATE
+CREATE TABLES THEN MAP THE OBJECTS NOT THE OTHER WAY AROUND
+ddl-auto:: has its risks
+
+
 - JPA: Jakarta Persistence API
 - ORM: Object Relational Mapping
 - Hibernate:  an implementation of JPA Specification
@@ -100,6 +104,12 @@ hence cascade should not be delete
   - THIS IS NEEDED IF WE WANT TO CREATE OR PERSIST FROM THE NON_OWNING SIDE
   - THE NON_OWNING SIDE CAN ONLY BE FETCHED FROM THE OWNING SIDE _*and not vice_versa*_
 
+### BI-DIRECTION
+- we can decide to use the JoinColumn or not as this has a default
+- we must use mappedBy on the non-owning side of the relationship
+- keep in mind the owning and non-owning side can have different cascading logic
+  - e.g if you want to persist from both sides, then both side should have only PERSIST
+  - if no action is wanted on the non-owning side, add no cascade at all
 
 # FetchType
 - EAGER -> this issues a join to call the non-owning side recommended for OneToOne

@@ -19,7 +19,7 @@ public class OneToManyMain {
 
         Map<String, String> props = new HashMap<>();
         props.put("hibernate.show_sql", "true");
-        props.put("hibernate.hbm2ddl.auto", "create");
+        props.put("hibernate.hbm2ddl.auto", "update");
 
         EntityManagerFactory emf = new HibernatePersistenceProvider()
                 .createContainerEntityManagerFactory(new CustomPersistenceUnitInfo2(), props);
@@ -28,16 +28,16 @@ public class OneToManyMain {
        try{
            em.getTransaction().begin();
 
-           Post post = new Post();
-           post.setTitle("Post 1");
-           post.setContent("Post Content");
+           Post post = em.find(Post.class, 1);
 
            Comment comment = new Comment();
            comment.setContent("Post Content");
 
-           post.setComments(List.of(comment));
+           comment.setPost(post);
 
-           em.persist(post);
+//           post.setComments(List.of(comment));
+
+
            em.persist(comment);
 
 

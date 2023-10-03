@@ -16,9 +16,8 @@ public class Post {
     private String content;
 
     // scenario 2
-    @OneToMany
-    @JoinColumn(name = "post")
-    private List<Comment> comments;
+    @OneToMany(mappedBy = "post", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Comment> comments; // Collection, List, Set works
 
     public int getId() {
         return id;
