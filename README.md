@@ -80,6 +80,26 @@ hence cascade should not be delete
         - passport.setPerson(person);
     - you can now query from both side
 
+## One to Many, Many to One
+### UNI-DIRECTIONAL
+- scenario 1
+- the owning side should be the many side 
+  - the owning side list would create a join column to reference the single side 
+  - THIS ENSURES WE CREATE/PERSIST FROM THE OWNING SIDE
+  - THE NON_OWNING SIDE CAN ONLY BE FETCHED FROM THE OWNING SIDE _*and not vice_versa*_
+  
+- if you create the relationship from non owning side, hibernate creates an extra table
+  - to map the list (comments) to the post, as hibernate has no other way to do it  (NOT_ADVISABLE)
+
+- scenario 2
+- however, we can map the uni-directional relationship from the non-owning side 
+  - and have the joinColumn referring to foreign_key
+    - in this case @OneToMany     
+      -             @JoinColumn(name = "post")
+      - this prevents an extra table from being created and the owning-side still keeps the relationship
+  - THIS IS NEEDED IF WE WANT TO CREATE OR PERSIST FROM THE NON_OWNING SIDE
+  - THE NON_OWNING SIDE CAN ONLY BE FETCHED FROM THE OWNING SIDE _*and not vice_versa*_
+
 
 # FetchType
 - EAGER -> this issues a join to call the non-owning side recommended for OneToOne
