@@ -137,4 +137,7 @@ hence cascade should not be delete
 
 - hence we only need define one Entity and use @SecondaryTable to map the other tables
 
-
+## Many to Many, Many to One
+### UNI-DIRECTIONAL
+- only the owning side needs to know about the relationship
+- there we will map the, @JoinTable- > joinColumns -> inverseJoinColumns
