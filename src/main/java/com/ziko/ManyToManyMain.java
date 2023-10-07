@@ -27,27 +27,31 @@ public class ManyToManyMain {
 
        try{
            em.getTransaction().begin();
-
-           Customer customer1 = new Customer();
-           customer1.setName("Customer 1");
-
-           Customer customer2 = new Customer();
-           customer2.setName("Customer 2");
-
-           Group group1 = new Group();
-           group1.setName("Group 1");
-
-           Group group2 = new Group();
-           group2.setName("Group 2");
-
-           group1.setCustomers(List.of(customer1, customer2));
-           group2.setCustomers(List.of(customer2));
-
-// since no CASCADE IS USED, i have to manually persist
-           em.persist(customer1);
-           em.persist(customer2);
-           em.persist(group1);
-           em.persist(group2);
+//
+//           Customer customer1 = new Customer();
+//           customer1.setName("Customer 1");
+//
+//           Customer customer2 = new Customer();
+//           customer2.setName("Customer 2");
+//
+//           Group group1 = new Group();
+//           group1.setName("Group 1");
+//
+//           Group group2 = new Group();
+//           group2.setName("Group 2");
+//
+//           group1.setCustomers(List.of(customer1, customer2));
+//           group2.setCustomers(List.of(customer2));
+//
+//           // this due to using bidirectional, we must map on both end
+//           customer1.setGroups(List.of(group1));
+//           customer2.setGroups(List.of(group1, group2));
+//
+//// since no CASCADE IS USED, i have to manually persist
+//           em.persist(customer1);
+//           em.persist(customer2);
+//           em.persist(group1);
+//           em.persist(group2);
 
 
            em.getTransaction().commit();

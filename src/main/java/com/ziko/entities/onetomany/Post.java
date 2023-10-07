@@ -16,7 +16,7 @@ public class Post {
     private String content;
 
     // scenario 2
-    @OneToMany(mappedBy = "post", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "post", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List<Comment> comments; // Collection, List, Set works
 
     public int getId() {

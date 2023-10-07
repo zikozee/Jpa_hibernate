@@ -14,6 +14,9 @@ public class Customer {
 
     private String name;
 
+    @ManyToMany(mappedBy = "customers")
+    private List<Group> groups;
+
     public int getId() {
         return id;
     }
@@ -30,4 +33,12 @@ public class Customer {
         this.name = name;
     }
 
+
+    public List<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
+    }
 }
